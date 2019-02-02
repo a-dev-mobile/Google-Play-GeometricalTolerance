@@ -1,0 +1,54 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="28dp"
+    android:height="21dp"
+    android:viewportHeight="21000"
+    android:viewportWidth="28000">
+    <group>
+        <clip-path android:pathData="M0,0h28000v21000h-28000z M 0,0" />
+    </group>
+    <group>
+        <clip-path android:pathData="M0,0h28000v21000h-28000z M 0,0" />
+        <path
+            android:fillColor="#00000000"
+            android:fillType="evenOdd"
+            android:pathData="M 1679,3079 L 26319,3079"
+            android:strokeColor="#000000"
+            android:strokeLineJoin="round"
+            android:strokeWidth="200" />
+        <path
+            android:fillColor="#00000000"
+            android:fillType="evenOdd"
+            android:pathData="M 26319,3079 L 26319,18759"
+            android:strokeColor="#000000"
+            android:strokeLineJoin="round"
+            android:strokeWidth="200" />
+        <path
+            android:fillColor="#00000000"
+            android:fillType="evenOdd"
+            android:pathData="M 26319,18759 L 1679,18759"
+            android:strokeColor="#000000"
+            android:strokeLineJoin="round"
+            android:strokeWidth="200" />
+        <path
+            android:fillColor="#00000000"
+            android:fillType="evenOdd"
+            android:pathData="M 1679,18759 L 1679,3079"
+            android:strokeColor="#000000"
+            android:strokeLineJoin="round"
+            android:strokeWidth="200" />
+        <path
+            android:fillColor="#00000000"
+            android:fillType="evenOdd"
+            android:pathData="M 8450,8990 L 19370,8990"
+            android:strokeColor="#000000"
+            android:strokeLineJoin="round"
+            android:strokeWidth="700" />
+        <path
+            android:fillColor="#00000000"
+            android:fillType="evenOdd"
+            android:pathData="M 8411,12518 L 19331,12518"
+            android:strokeColor="#000000"
+            android:strokeLineJoin="round"
+            android:strokeWidth="700" />
+    </group>
+</vector>
