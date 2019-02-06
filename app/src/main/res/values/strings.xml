@@ -28,6 +28,15 @@
 
     <string name="email_send_app">Send email using…</string>
     <string name="email_no_app">No email clients installed.</string>
+    <string name="nav_title">Допуски</string>
+    <string name="nav_menu_form">Формы</string>
+    <string name="nav_menu_orient">Ориентации</string>
+    <string name="nav_menu_loc">Месторасположения</string>
+    <string name="nav_menu_runout">Биения</string>
+    <string name="nav_title_other_setting">Другое</string>
+    <string name="nav_app_top">Оценить приложение</string>
+    <string name="nav_menu_send_email">Написать предложение</string>
+    <string name="nav_menu_about_app">О приложении</string>
 
 
 </resources>

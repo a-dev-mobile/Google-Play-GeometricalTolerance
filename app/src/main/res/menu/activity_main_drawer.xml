@@ -2,26 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-    <item android:title="Допуски">
+    <item android:title="@string/nav_title">
 
         <menu>
             <group>
                 <item
                     android:id="@+id/nav_form"
 
-                    android:title="Формы" />
+                    android:title="@string/nav_menu_form" />
                 <item
                     android:id="@+id/nav_orient"
 
-                    android:title="Ориентации" />
+                    android:title="@string/nav_menu_orient" />
                 <item
                     android:id="@+id/nav_loc"
 
-                    android:title="Месторасположения" />
+                    android:title="@string/nav_menu_loc" />
                 <item
                     android:id="@+id/nav_runout"
 
-                    android:title="Биения" />
+                    android:title="@string/nav_menu_runout" />
 
             </group>
         </menu>
@@ -46,21 +46,21 @@
             </group>
         </menu>
     </item>-->
-    <item android:title="Другое">
+    <item android:title="@string/nav_title_other_setting">
         <menu>
             <group>
                 <item
                     android:id="@+id/navItemRateUs"
                     android:icon="@drawable/ic_star"
-                    android:title="Оценить приложение" />
+                    android:title="@string/nav_app_top" />
                 <item
                     android:id="@+id/nav_send"
                     android:icon="@drawable/ic_menu_send"
-                    android:title="Написать предложение" />
+                    android:title="@string/nav_menu_send_email" />
                 <item
                     android:id="@+id/nav_about"
                     android:icon="@drawable/ic_info"
-                    android:title="О приложении" />
+                    android:title="@string/nav_menu_about_app" />
 
 
             </group>

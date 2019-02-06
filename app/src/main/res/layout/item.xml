@@ -31,7 +31,8 @@
 
                 android:layout_margin="10dp"
                 android:scaleType="fitCenter"
-                toolandroid:src="@drawable/ic_tol_form_1" />
+                toolandroid:src="@drawable/ic_tol_form_1"
+                android:contentDescription="tolerance" />
 
     <!--        <TextView
                 android:id="@+id/tv_title"
