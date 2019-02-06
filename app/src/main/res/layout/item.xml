@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:id="@+id/ll_root"
             android:layout_height="match_parent"
-            android:background="#CCDCFAFD"
+            android:background="#F9FBE7"
             android:orientation="vertical">
 
             <ImageView

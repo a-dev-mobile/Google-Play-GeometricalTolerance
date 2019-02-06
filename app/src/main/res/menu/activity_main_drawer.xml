@@ -2,32 +2,32 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-    <item android:title="Допуски (типы)">
+    <item android:title="Допуски">
 
         <menu>
             <group>
                 <item
                     android:id="@+id/nav_form"
-                    android:icon="@drawable/ic_menu_camera"
+
                     android:title="Формы" />
                 <item
+                    android:id="@+id/nav_orient"
+
+                    android:title="Ориентации" />
+                <item
                     android:id="@+id/nav_loc"
-                    android:icon="@drawable/ic_menu_gallery"
-                    android:title="Расположения" />
+
+                    android:title="Месторасположения" />
                 <item
-                    android:id="@+id/nav_formloc"
-                    android:icon="@drawable/ic_menu_slideshow"
-                    android:title="Суммарный" />
-                <item
-                    android:id="@+id/nav_example"
-                    android:icon="@drawable/ic_menu_manage"
-                    android:title="Примеры" />
+                    android:id="@+id/nav_runout"
+
+                    android:title="Биения" />
 
             </group>
         </menu>
     </item>
 
-    <item android:title="Зависимые допуски (Примеры)">
+    <!--<item android:title="Зависимые допуски (Примеры)">
         <menu>
             <group>
                 <item
@@ -45,7 +45,7 @@
 
             </group>
         </menu>
-    </item>
+    </item>-->
     <item android:title="Другое">
         <menu>
             <group>
