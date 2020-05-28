@@ -15,7 +15,7 @@ class AssetDBOpenHelper(private val context: Context) : SQLiteOpenHelper(
     DB_VERSION
 ) {
 
-    internal val TAG = "AssetDBOpenHelper"
+    internal val tag = "AssetDBOpenHelper"
     override fun onCreate(db: SQLiteDatabase?) {
     }
 

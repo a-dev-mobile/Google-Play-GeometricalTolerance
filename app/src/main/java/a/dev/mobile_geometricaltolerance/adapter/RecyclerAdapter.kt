@@ -10,7 +10,6 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item.view.iv_image
-import kotlinx.android.synthetic.main.item.view.ll_root
 import kotlinx.android.synthetic.main.item.view.wv_info
 
 class RecyclerAdapter(private val bases: ArrayList<BaseModel>) :

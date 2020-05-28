@@ -1,8 +1,8 @@
 package a.dev.mobile_geometricaltolerance.base
 
  class BaseModel(
-     internal val _id: Int,
-     internal val title: String,
+     private val _id: Int,
+     private val title: String,
      internal val folder: String,
      val image: String
  )

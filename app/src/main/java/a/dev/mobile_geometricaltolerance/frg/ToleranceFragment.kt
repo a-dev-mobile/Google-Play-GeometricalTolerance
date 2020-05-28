@@ -1,23 +1,22 @@
 package a.dev.mobile_geometricaltolerance.frg
 
-import a.dev.mobile_geometricaltolerance.utils.AssetDBOpenHelper
 import a.dev.mobile_geometricaltolerance.MainActivity
 import a.dev.mobile_geometricaltolerance.R
 import a.dev.mobile_geometricaltolerance.R.layout
 import a.dev.mobile_geometricaltolerance.adapter.RecyclerAdapter
 import a.dev.mobile_geometricaltolerance.base.BaseFragment
+import a.dev.mobile_geometricaltolerance.utils.AssetDBOpenHelper
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 
-class ToleranceFragment()  : BaseFragment() {
+class ToleranceFragment : BaseFragment() {
 
-    internal val TAG = "ToleranceFragment"
+    internal val tag = "ToleranceFragment"
 
     private lateinit var dbHelper: AssetDBOpenHelper
     private lateinit var mAdapter: RecyclerAdapter
@@ -45,6 +44,6 @@ class ToleranceFragment()  : BaseFragment() {
 
     override fun setUp() {
 
-        Log.d(TAG, "click dopusk")
+        //Log.d(tag, "click dopusk")
     }
 }

@@ -13,7 +13,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 class AboutFragment : BaseFragment() {
-    internal val TAG = "AboutFragment"
+    internal val tag = "AboutFragment"
 
     fun newInstance(): AboutFragment {
         return AboutFragment()
@@ -28,7 +28,7 @@ class AboutFragment : BaseFragment() {
     }
 
     override fun setUp() {
-        Log.d(TAG, "click back from about")
+        Log.d(tag, "click back from about")
     }
 }
 

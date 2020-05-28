@@ -5,14 +5,20 @@ import a.dev.mobile_geometricaltolerance.base.BaseActivity
 import a.dev.mobile_geometricaltolerance.frg.AboutFragment
 import a.dev.mobile_geometricaltolerance.frg.ToleranceFragment
 import a.dev.mobile_geometricaltolerance.utils.AssetDBOpenHelper
+import a.dev.mobile_geometricaltolerance.utils.PREF_TYPE
+import a.dev.mobile_geometricaltolerance.utils.SHARED_PREFERENCES
 import a.dev.mobile_geometricaltolerance.utils.TYPE_FORM
 import a.dev.mobile_geometricaltolerance.utils.TYPE_LOC
 import a.dev.mobile_geometricaltolerance.utils.TYPE_ORIENT
 import a.dev.mobile_geometricaltolerance.utils.TYPE_RUNOUT
 import a.dev.mobile_geometricaltolerance.utils.addFragment
 import a.dev.mobile_geometricaltolerance.utils.removeFragment
+import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 
@@ -21,6 +27,9 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.drawer_layout
 import kotlinx.android.synthetic.main.activity_main.nav_view
 import kotlinx.android.synthetic.main.app_bar_main.toolbar
@@ -41,15 +50,36 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         supportFragmentManager?.removeFragment(tag = tag)
     }
 
+    private lateinit var mAdView : AdView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        TYPE = loadIntFromFile()
         //сохранять тип допусков показаных в последний раз
         openToleranceFrg()
 
         setUpDrawerMenu()
         AssetDBOpenHelper(this).openDatabase()
+
+        // Initialize the Mobile Ads SDK.
+        MobileAds.initialize(this, "ca-app-pub-6155876762943258~2413814075")
+
+        // Gets the ad view defined in layout/ad_fragment.xml with ad unit ID set in
+        // values/strings.xml.
+        mAdView = findViewById(R.id.ad_view)
+
+        // Create an ad request. Check your logcat output for the hashed device ID to
+        // get test ads on a physical device. e.g.
+        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
+
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
+
+
+
+
+
     }
 
     private fun setUpDrawerMenu() {
@@ -64,12 +94,31 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         nav_view.setNavigationItemSelectedListener(this)
     }
 
+    private fun loadIntFromFile(): Int {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
+        var i = 1
+        if (sharedPreferences.contains(PREF_TYPE)) {
+            i = sharedPreferences.getInt(PREF_TYPE, i)
+        }
+        return i
+    }
+
+    private fun saveIntInFile(value: Int) {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putInt(PREF_TYPE, value)
+        editor.apply()
+    }
+
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
+        } else  {
+            drawer_layout.openDrawer(GravityCompat.START)
+    //        exitFromApp()
         }
+
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -78,7 +127,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             R.id.nav_about -> openAboutFrg()
             R.id.nav_form -> {
                 TYPE = TYPE_FORM
-                openToleranceFrg ()
+                openToleranceFrg()
             }
             R.id.nav_orient -> {
                 TYPE = TYPE_ORIENT
@@ -94,9 +143,17 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             }
 
             R.id.nav_send -> sendEmail()
+            R.id.navItemRateUs -> appRate()
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun appRate() {
+
+        val marketUri = Uri.parse("market://details?id=a.dev.mobile_geometricaltolerance")
+        val marketIntent = Intent(Intent.ACTION_VIEW).setData(marketUri)
+        startActivity(marketIntent)
     }
 
     private fun sendEmail() {
@@ -118,8 +175,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     private fun clearFrg() {
 
-        if (getTagFrg().equals(ToleranceFragment().TAG)) onFragmentDetached(ToleranceFragment().TAG)
-        if (getTagFrg().equals(AboutFragment().TAG)) onFragmentDetached(AboutFragment().TAG)
+        if (getTagFrg().equals(ToleranceFragment().tag)) onFragmentDetached(ToleranceFragment().tag)
+        if (getTagFrg().equals(AboutFragment().tag)) onFragmentDetached(AboutFragment().tag)
     }
 
     private fun getTagFrg(): String? {
@@ -127,11 +184,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         val fragment = supportFragmentManager.findFragmentById(R.id.root_view)
 
         if (fragment != null) {
-            if (fragment.tag.equals(AboutFragment().TAG)) {
-                return AboutFragment().TAG
+            if (fragment.tag.equals(AboutFragment().tag)) {
+                return AboutFragment().tag
             }
-            if (fragment.tag.equals(ToleranceFragment().TAG)) {
-                return ToleranceFragment().TAG
+            if (fragment.tag.equals(ToleranceFragment().tag)) {
+                return ToleranceFragment().tag
             }
         }
         return null
@@ -149,22 +206,56 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
 
 
-
+        saveIntInFile(TYPE)
 
         supportFragmentManager.addFragment(
             R.id.root_view,
             ToleranceFragment().newInstance(),
-            ToleranceFragment().TAG
+            ToleranceFragment().tag
         )
+    }
+    private var backPressed: Long = 0
+    @SuppressLint("StringFormatInvalid")
+    private fun exitFromApp() {
+
+        if (backPressed + 3000 > System.currentTimeMillis()) {
+            super.onBackPressed()
+        } else {
+            Toast.makeText(baseContext, getString(R.string.post_to_exit, Toast.LENGTH_SHORT), Toast.LENGTH_SHORT)
+                .show()
+        }
+        backPressed = System.currentTimeMillis()
     }
 
     private fun openAboutFrg() {
         clearFrg()
-
+        toolbar.title = getString(R.string.nav_menu_about_app)
         supportFragmentManager.addFragment(
             R.id.root_view,
             AboutFragment().newInstance(),
-            AboutFragment().TAG
+            AboutFragment().tag
         )
     }
+
+    /** Called when leaving the activity  */
+    public override fun onPause() {
+        mAdView.pause()
+        super.onPause()
+    }
+
+    /** Called when returning to the activity  */
+    public override fun onResume() {
+        super.onResume()
+        mAdView.resume()
+    }
+
+    /** Called before the activity is destroyed  */
+    public override fun onDestroy() {
+        mAdView.destroy()
+        super.onDestroy()
+    }
+
+
+
+
 }
